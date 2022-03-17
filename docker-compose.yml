@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  ignition:
+    image: kcollins/ignition:8.1.13
+    ports:
+      - "8088:8088"
+      - "8043:8043"
+      - "8060:8060"
+      - "8000:8000"
+      - "9222:9222"
+    volumes:
+      - ./ignition.conf:/var/lib/ignition/data/ignition.conf
+    environment:
+      GATEWAY_SYSTEM_NAME: module-dev
+      GATEWAY_ADMIN_USERNAME: tamaki
+      GATEWAY_ADMIN_PASSWORD: tamaki01
+      IGNITION_EDITION: full
+      TZ: "America/Boise"
+    restart: unless-stopped
+

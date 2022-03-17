@@ -1,0 +1,10 @@
+# Project exclude paths
+/example-build/target/
+/example-common/target/
+/example-designer/target/
+/example-gateway/target/
+/example-perspective/node_modules/
+/example-perspective/packages/client/node_modules/
+/example-perspective/target/
+/example-gateway/src/main/resources/mounted/
+/example-perspective/packages/client/dist/

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>example</artifactId>
+        <groupId>com.tamakicontrol</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>example-build</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tamakicontrol</groupId>
+            <artifactId>example-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tamakicontrol</groupId>
+            <artifactId>example-designer</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tamakicontrol</groupId>
+            <artifactId>example-gateway</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.inductiveautomation.ignitionsdk</groupId>
+                <artifactId>ignition-maven-plugin</artifactId>
+                <version>1.2.0</version>
+
+                <executions>
+                    <execution>
+                        <id>package-modl</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>modl</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>install-modl</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>post</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <projectScopes>
+                        <projectScope>
+                            <name>example-common</name>
+                            <scope>DG</scope>
+                        </projectScope>
+                        <projectScope>
+                            <name>example-designer</name>
+                            <scope>D</scope>
+                        </projectScope>
+                        <projectScope>
+                            <name>example-gateway</name>
+                            <scope>G</scope>
+                        </projectScope>
+                    </projectScopes>
+
+                    <depends>
+                        <depend>
+                            <scope>G</scope>
+                            <moduleId>com.inductiveautomation.perspective</moduleId>
+                        </depend>
+                    </depends>
+
+                    <moduleId>com.tamakicontrol.example</moduleId>
+                    <moduleName>${project.parent.name}</moduleName>
+                    <moduleDescription>${project.description}</moduleDescription>
+                    <moduleVersion>1.0.0</moduleVersion>
+                    <requiredIgnitionVersion>8.0.0</requiredIgnitionVersion>
+
+                    <hooks>
+                        <hook>
+                            <scope>D</scope>
+                            <hookClass>com.tamakicontrol.designer.DesignerHook</hookClass>
+                        </hook>
+                        <hook>
+                            <scope>G</scope>
+                            <hookClass>com.tamakicontrol.GatewayHook</hookClass>
+                        </hook>
+                    </hooks>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
