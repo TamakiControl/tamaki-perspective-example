@@ -7,6 +7,8 @@ import com.inductiveautomation.ignition.gateway.model.GatewayContext;
 import com.inductiveautomation.perspective.gateway.api.PerspectiveContext;
 import com.tamakicontrol.perspective.components.CounterComponent;
 import com.tamakicontrol.perspective.components.TimelineChartComponent;
+import com.tamakicontrol.tags.ExampleTagProvider;
+import com.tamakicontrol.tags.TamakiHubDataProvider;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -23,16 +25,21 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         this.gatewayContext = gatewayContext;
         initializePerspectiveContext();
         registerPerspectiveComponents();
+        ExampleTagProvider.initialize(gatewayContext);
     }
+
+    private TamakiHubDataProvider dataProvider;
 
     @Override
     public void startup(LicenseState licenseState) {
-
+        this.dataProvider = new TamakiHubDataProvider(gatewayContext);
     }
 
     @Override
     public void shutdown() {
         deregisterPerspectiveComponents();
+        dataProvider.shutdown();
+        ExampleTagProvider.getInstance().get().shutdown(true);
     }
 
     @Override
