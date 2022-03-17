@@ -11,14 +11,20 @@ import {
 export const COMPONENT_ID = "counter";
 
 export interface CounterProps {
+    count: number;
+    setCount: Function;
 }
 
 export function Counter(props: ComponentProps<CounterProps>) {
-    const {props: {}} = props;
+    const {props: { count, setCount }} = props;
 
     return (
         <div>
-            Hello World
+            <button
+                onClick={() => setCount(count + 1)}
+                style={{ width: "100%", height: "100%" }}>
+                <h1>{count}</h1>
+            </button>
         </div>
     );
 }
@@ -26,7 +32,10 @@ export function Counter(props: ComponentProps<CounterProps>) {
 export class CounterMeta implements ComponentMeta {
 
     getPropsReducer(tree: PropertyTree): CounterProps {
-        return {};
+        return {
+            count: tree.read("count", 0),
+            setCount: (count: number) => tree.write("count", count)
+        };
     }
 
     getComponentType(): string {
