@@ -6,6 +6,7 @@ import com.inductiveautomation.ignition.designer.model.AbstractDesignerModuleHoo
 import com.inductiveautomation.ignition.designer.model.DesignerContext;
 import com.inductiveautomation.perspective.designer.api.PerspectiveDesignerInterface;
 import com.tamakicontrol.perspective.components.CounterComponent;
+import com.tamakicontrol.perspective.components.TimelineChartComponent;
 
 public class DesignerHook extends AbstractDesignerModuleHook {
 
@@ -31,6 +32,7 @@ public class DesignerHook extends AbstractDesignerModuleHook {
             var pdi = PerspectiveDesignerInterface.get(designerContext);
             var registry = pdi.getDesignerComponentRegistry();
             registry.registerComponent(CounterComponent.DESCRIPTOR);
+            registry.registerComponent(TimelineChartComponent.DESCRIPTOR);
             logger.info("Perspective Components Registered");
         } catch (Exception e) {
             logger.error("Error registering perspective components", e);

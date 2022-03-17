@@ -6,6 +6,7 @@ import com.inductiveautomation.ignition.gateway.model.AbstractGatewayModuleHook;
 import com.inductiveautomation.ignition.gateway.model.GatewayContext;
 import com.inductiveautomation.perspective.gateway.api.PerspectiveContext;
 import com.tamakicontrol.perspective.components.CounterComponent;
+import com.tamakicontrol.perspective.components.TimelineChartComponent;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +58,10 @@ public class GatewayHook extends AbstractGatewayModuleHook {
             logger.info("Registering Perspective Components");
             var registry = perspectiveContext.getComponentRegistry();
             Objects.requireNonNull(registry, "ComponentRegistry is null");
+
             registry.registerComponent(CounterComponent.DESCRIPTOR);
+            registry.registerComponent(TimelineChartComponent.DESCRIPTOR);
+
             logger.info("Completed Registering Perspective Components");
 
         } catch (Exception e) {
@@ -70,7 +74,10 @@ public class GatewayHook extends AbstractGatewayModuleHook {
             logger.info("Deregistering Perspective Components");
             var registry = perspectiveContext.getComponentRegistry();
             Objects.requireNonNull(registry, "ComponentRegistry is null");
+
             registry.removeComponent(CounterComponent.COMPONENT_ID);
+            registry.removeComponent(TimelineChartComponent.COMPONENT_ID);
+
             logger.info("Completed Deregistering Perspective Components");
         } catch (Exception e) {
             logger.error("Error deregistering PerspectiveComponent", e);
