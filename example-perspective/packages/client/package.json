@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@inductiveautomation/perspective-client": "~2.1.0",
+    "apexcharts": "^3.33.2",
     "react": "~16.8.4",
+    "react-apexcharts": "^1.4.0",
     "react-dom": "~16.8.4"
   },
   "devDependencies": {
@@ -27,8 +29,8 @@
     "babel-core": "^6.26.3",
     "css-loader": "^2.1.1",
     "mini-css-extract-plugin": "^0.7.0",
-    "on-build-webpack": "^0.1.0",
     "node-sass": "^6.0.1",
+    "on-build-webpack": "^0.1.0",
     "sass-loader": "^10.2.0",
     "ts-loader": "^5.3.3",
     "tslint": "^5.14.0",
